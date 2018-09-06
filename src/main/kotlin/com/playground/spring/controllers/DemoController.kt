@@ -1,5 +1,6 @@
-package com.sample.helloworld.demo.controllers
+package com.playground.spring.controllers
 
+import com.github.jknack.handlebars.Handlebars
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
@@ -12,6 +13,14 @@ class DemoController {
     fun sayHelloWorld(): ResponseEntity<Response> {
         println("Saying Hello")
         return ResponseEntity(Response("Hello World"), HttpStatus.OK)
+    }
+
+    @RequestMapping(value = ["/handlebars"], produces = ["application/json"])
+    fun handlebars(): ResponseEntity<Response> {
+        val handlebars = Handlebars()
+        val template = handlebars.compileInline("Parsing {{this}} value")
+        val parsedValue = template.apply("sample")
+        return ResponseEntity(Response(parsedValue), HttpStatus.OK)
     }
 }
 
