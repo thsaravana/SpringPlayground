@@ -30,11 +30,17 @@ class DemoController {
         loader.prefix = "/templates"
         val handlebars = Handlebars(loader)
         val template = handlebars.compile("expressions")
-        val parsedValue = template.apply(Sample("a", "b"))
+        val parsedValue = template.apply(Book(
+                "Juniper Travels",
+                listOf("John Caudwell", "James Brown"),
+                Publication("Merlin")
+        ))
         return ResponseEntity(Response(parsedValue), HttpStatus.OK)
     }
 }
 
 data class Response(val key: String)
 
-data class Sample(val a: String, val b: String)
+data class Book(val name: String, val authors: List<String>, val publication: Publication)
+
+data class Publication(val name: String)

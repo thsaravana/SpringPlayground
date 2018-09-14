@@ -1,1 +1,5 @@
-Parsing {{a}} value using {{b}} templates
+Parsing {{name}} value using {{authors}} templates.
+The publication is {{publication.name}}
+{{#each authors}}
+    Author: {{this}}
+{{/each}}
